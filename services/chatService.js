@@ -159,6 +159,13 @@ class ChatService {
         throw new Error('AI Provider not configured');
       }
 
+      console.log('--- Chat API Call ---');
+      console.log('Provider:', process.env.AI_PROVIDER);
+      console.log('URL:', apiUrl);
+      console.log('Headers:', headers);
+      console.log('Request Body:', JSON.stringify(requestBody, null, 2));
+      console.log('---------------------');
+     
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: headers,
