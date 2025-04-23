@@ -137,7 +137,10 @@ class ChatService {
           stream: true
         };
       } else if (process.env.AI_PROVIDER === 'custom') {
-        apiUrl = process.env.CUSTOM_BASE_URL;
+        // Ensure no trailing slash to avoid '//chat/completions'
+        const baseUrl = process.env.CUSTOM_BASE_URL.replace(/\/+$/, '');
+        const apiUrl = `${baseUrl}/chat/completions`;
+
         headers['Authorization'] = `Bearer ${process.env.CUSTOM_API_KEY}`;
         requestBody = {
           model: process.env.CUSTOM_MODEL,
